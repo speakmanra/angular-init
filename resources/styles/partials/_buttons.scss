@@ -1,0 +1,9 @@
+@import "src/styles/config";
+
+button {
+  font-family: $tt-squares-black;
+  text-transform: uppercase;
+  font-size: rem-calc(23);
+  width: fit-content;
+  margin: auto;
+}

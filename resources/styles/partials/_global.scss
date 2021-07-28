@@ -1,0 +1,26 @@
+@import "src/styles/config";
+
+html {
+  -ms-overflow-style: none;
+  overflow: auto;
+}
+
+body {
+  background-color: $dark-blue;
+  color: $white;
+  -webkit-tap-highlight-color: transparent;
+  height: 100%;
+}
+
+button:focus,
+mat-icon:focus,
+app-leaderboard-card:focus,
+app-achievement-card:focus,
+app-activity-card:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: $white;
+}

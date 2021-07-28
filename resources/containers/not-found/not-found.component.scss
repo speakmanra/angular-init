@@ -1,0 +1,14 @@
+@import "src/styles/config";
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+img {
+  width:100%;
+  max-width: 800px;
+}
