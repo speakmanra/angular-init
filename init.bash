@@ -33,9 +33,9 @@ cd ./$projectName
 echo 'Installing additional dependencies...'
 yarn add @angular/router @ngrx/store @ngrx/router @ngrx/effects @ngrx/router-store ngrx-store-localstorage normalize-scss rxjs @angular/cdk ngrx-store-freeze @ngrx/store-devtools @angular/material
 echo 'Installing additional dev dependencies...'
-yarn add -D husky typescript prettier stylelint angular-testing-library codelyzer jasmine-spec-reporter ts-node tslint
+yarn add -D jest husky jest-preset-angular typescript prettier stylelint angular-testing-library codelyzer jasmine-spec-reporter ts-node tslint @types/jest
 echo 'Removing Karma...'
-ng add @briebug/jest
+yarn remove karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter
 
 cd ../ags-angular-init
 
