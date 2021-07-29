@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { TextBoxComponent } from './text-box.component';
 
@@ -8,7 +9,8 @@ describe('TextBoxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TextBoxComponent ]
+      declarations: [ TextBoxComponent ],
+      imports: [RouterTestingModule]
     })
     .compileComponents();
   });

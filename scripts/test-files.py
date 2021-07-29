@@ -15,11 +15,7 @@ ts_config_app_content = '''
     "src/polyfills.ts"
   ],
   "include": [
-    // "src/**/*.ts"
-  ],
-  "exclude": [
-    "src/test.ts",
-    "src/**/*.spec.ts"
+    "src/**/*.d.ts"
   ]
 }
 '''
@@ -28,15 +24,13 @@ ts_config_spec_content = '''
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "emitDecoratorMetadata": true,
     "outDir": "./out-tsc/spec",
     "types": [
-      "jasmine",
+      "jest",
       "node"
     ]
   },
   "files": [
-    "src/test.ts",
     "src/polyfills.ts"
   ],
   "include": [
@@ -46,58 +40,71 @@ ts_config_spec_content = '''
 }
 '''
 
-main_ts_content = '''
-
-const mock = () => {
-  let storage: any = {};
-  return {
-    getItem: (key: any) => (key in storage ? storage[key] : null),
-    setItem: (key: any, value: any) => (storage[key] = value || ''),
-    removeItem: (key: any) => delete storage[key],
-    clear: () => (storage = {})
-  };
-};
-
-Object.defineProperty(window, 'localStorage', { value: mock() });
-Object.defineProperty(window, 'sessionStorage', { value: mock() });
-Object.defineProperty(window, 'getComputedStyle', {
-  value: () => ['-webkit-appearance']
-});
-// Used to fix the ReferenceError: CSS is not defined ERROR
-Object.defineProperty(window, 'CSS', { value: mock() });
-// Suppresses console warning from Materia
-console.warn = () => {
-  return;
-};
-
-Object.defineProperty(window, 'SVGElement', { value: Element });
-/**
- * ISSUE: https://github.com/angular/material2/issues/7101
- * Workaround for JSDOM missing transform property
- */
-Object.defineProperty(document.body.style, 'transform', {
-  value: () => {
-    return {
-      enumerable: true,
-      configurable: true
-    };
+ts_config = '''
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2017",
+    "module": "es2020",
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
-});
-
-/**
- * Fixes Material SnackBar window binding
- */
-Object.defineProperty(window, 'matchMedia', {
-  value: () => {
-    return window.matchMedia.bind(window);
-  }
-});
+}
 '''
 
 setup_jest_content = '''
-import 'jest-preset-angular';
-import './jest-global-mocks';
+import 'jest-preset-angular/setup-jest';
 '''
+
+app_spec_test = '''
+import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
+
+describe('AppComponent', () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        AppComponent
+      ],
+      imports: [RouterTestingModule]
+    }).compileComponents();
+  });
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+});
+'''
+
+with open(package_file_path + '/src/app/app.component.spec.ts', 'r+') as f:
+  f.seek(0)
+  f.write(app_spec_test)
+  f.write('\n')
+  f.truncate()
 
 with open(package_file_path + '/tsconfig.app.json', 'r+') as f:
   f.seek(0)
@@ -105,15 +112,15 @@ with open(package_file_path + '/tsconfig.app.json', 'r+') as f:
   f.write('\n')
   f.truncate()
 
-with open(package_file_path + '/tsconfig.spec.json', 'r+') as f:
+with open(package_file_path + '/tsconfig.json', 'r+') as f:
   f.seek(0)
-  f.write(ts_config_spec_content)
+  f.write(ts_config)
   f.write('\n')
   f.truncate()
 
-with open(package_file_path + '/src/test-global-mocks.ts', 'r+') as f:
+with open(package_file_path + '/tsconfig.spec.json', 'r+') as f:
   f.seek(0)
-  f.write(main_ts_content)
+  f.write(ts_config_spec_content)
   f.write('\n')
   f.truncate()
 

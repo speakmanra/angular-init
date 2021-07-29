@@ -31,9 +31,9 @@ cd ./$projectName
 
 # Install our default dependencies
 echo 'Installing additional dependencies...'
-yarn add @angular/router @ngrx/store @ngrx/router @ngrx/effects @ngrx/router-store ngrx-store-localstorage normalize-scss rxjs @angular/cdk ngrx-store-freeze @ngrx/store-devtools @angular/material
+yarn add @angular/router @ngrx/store @ngrx/router @ngrx/effects @ngrx/router-store ngrx-store-localstorage normalize-scss rxjs@6.6.0 @angular/cdk ngrx-store-freeze @ngrx/store-devtools @angular/material
 echo 'Installing additional dev dependencies...'
-yarn add -D jest husky jest-preset-angular typescript prettier stylelint angular-testing-library codelyzer jasmine-spec-reporter ts-node tslint @types/jest
+yarn add -D jest husky@4.2.5 jest-preset-angular typescript prettier stylelint angular-testing-library codelyzer jasmine-spec-reporter ts-node tslint @types/jest @angular-devkit/build-angular
 echo 'Removing Karma...'
 yarn remove karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter
 
@@ -55,8 +55,10 @@ python3 ./scripts/readme.py $projectName
 
 echo 'Setting up testing...'
 touch ../$projectName/src/setup-jest.ts
-touch ../$projectName/src/test-global-mocks.ts
+rm ../$projectName/src/test.ts
+rm ../$projectName/karma.conf.js
 python3 ./scripts/test-files.py $projectName
+python3 ./scripts/angular.json.py $projectName
 
 echo 'Setting up styling...'
 python3 ./scripts/style-files.py $projectName
@@ -77,7 +79,7 @@ python3 ./scripts/app.module.py $projectName
 
 cd ../$projectName
 git add .
-git commit -m "initial commit" --no-verify
+git commit -m "initial commit"
 
 echo 'Enjoy your new project :D'
-exit 1
+exit

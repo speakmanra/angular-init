@@ -11,4 +11,5 @@ copytree('./resources/containers', package_file_path + '/src/app/containers')
 copytree('./resources/components', package_file_path + '/src/app/components')
 copytree('./resources/fonts', package_file_path + '/src/assets/fonts')
 copyfile('./resources/files/app.component.html', package_file_path + '/src/app/app.component.html')
+copyfile('./resources/files/tslint.json', package_file_path + '/tslint.json')
 

@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import * as fromStore from '../../store';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-text-box',
@@ -9,10 +7,5 @@ import * as fromStore from '../../store';
 })
 export class TextBoxComponent {
 
-  constructor(private store: Store<fromStore.AppState>) { }
-
-  login(): void {
-    this.store.dispatch(fromStore.Login())
-  }
-
+  constructor() { }
 }
