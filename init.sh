@@ -30,10 +30,12 @@ fi
 cd ./$projectName
 
 # Install our default dependencies
+# Some of these will need to be changed from time to time. As Angular releases new versions, certain versions of packages
+# such as Typescript might need to be used. 
 echo 'Installing additional dependencies...'
 yarn add @angular/router @ngrx/store @ngrx/router @ngrx/effects @ngrx/router-store ngrx-store-localstorage normalize-scss rxjs@6.6.0 @angular/cdk ngrx-store-freeze @ngrx/store-devtools @angular/material
 echo 'Installing additional dev dependencies...'
-yarn add -D jest husky@4.2.5 jest-preset-angular typescript prettier stylelint angular-testing-library codelyzer jasmine-spec-reporter ts-node tslint @types/jest @angular-devkit/build-angular
+yarn add -D jest husky@4.2.5 jest-preset-angular typescript@4.3.5 prettier stylelint angular-testing-library codelyzer jasmine-spec-reporter ts-node tslint @types/jest @angular-devkit/build-angular
 echo 'Removing Karma...'
 yarn remove karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter
 
@@ -67,12 +69,6 @@ echo 'Creating folders and starter components...'
 python3 ./scripts/copy-files.py $projectName
 mkdir ../$projectName/src/app/guards
 mkdir ../$projectName/src/app/models
-
-cd ../$projectName/src/app/components
-ng g c text-box
-cd ../containers
-ng g c home
-ng g c not-found
 
 cd ../../../../ags-angular-init
 python3 ./scripts/app.module.py $projectName
