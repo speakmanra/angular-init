@@ -70,7 +70,6 @@ python3 ./scripts/copy-files.py $projectName
 mkdir ../$projectName/src/app/guards
 mkdir ../$projectName/src/app/models
 
-cd ../../../../ags-angular-init
 python3 ./scripts/app.module.py $projectName
 
 cd ../$projectName
