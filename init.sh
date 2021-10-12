@@ -6,8 +6,8 @@ cd $(dirname $0)
 read  -p "Project Name:" projectName
 
 # Update Angular CLI
-echo "Updating global Angular CLI to the latest version..."
-npm install -g @angular/cli@latest
+echo "Updating global Angular CLI to 12.1.4..."
+npm install -g @angular/cli@12.1.4
 
 echo  "Creating AGS project "$projectName"..."
 

@@ -1,1 +1,5 @@
-<app-text-box></app-text-box>
+<div class="buttons">
+  <button *ngIf="!(isLoggedIn$ | async)" (click)="login()">Login</button>
+  <button *ngIf="isLoggedIn$ | async" (click)="logout()">Logout</button>
+</div>
+<app-text-box [userInfo]="userInfo" [isLoggedIn]="isLoggedIn$ | async"></app-text-box>

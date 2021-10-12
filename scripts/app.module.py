@@ -15,6 +15,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, effects } from './store';
 import { localStorageSync } from 'ngrx-store-localstorage';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Components
 import { AppComponent } from './app.component';
@@ -26,9 +27,9 @@ import { NotFoundComponent } from './containers/not-found/not-found.component';
 
 // Routing
 import { Routes, RouterModule } from '@angular/router';
+import { NotificationsModule } from './notifications/notifications.module';
 
 // Guards
-
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
@@ -46,7 +47,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: HomeComponent
   },
   // Must come last -----------
   {
@@ -68,14 +69,16 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     StoreModule,
     FormsModule,
     ReactiveFormsModule,
+    NotificationsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
     HttpClientModule,
     RouterModule.forRoot(routes),
-    environment.production ? [] : StoreDevtoolsModule.instrument(),
+    environment.production ? [] : StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]

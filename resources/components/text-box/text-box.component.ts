@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-text-box',
@@ -6,6 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./text-box.component.scss']
 })
 export class TextBoxComponent {
+  @Input()
+  userInfo: any;
 
-  constructor() { }
+  @Input()
+  isLoggedIn: boolean | null = false;
+
+  constructor() {}
 }

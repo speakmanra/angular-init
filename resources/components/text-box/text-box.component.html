@@ -1,1 +1,6 @@
-<p>text-box works!</p>
+<div *ngIf="isLoggedIn" class="info">
+  <p>Username: {{ userInfo?.username }}</p>
+  <p>First Name: {{ userInfo?.firstName }}</p>
+  <p>Last Name: {{ userInfo?.lastName }}</p>
+</div>
+

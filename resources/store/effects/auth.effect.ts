@@ -2,19 +2,14 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import {
-  catchError,
-  map,
-  exhaustMap,
-} from 'rxjs/operators';
+import { catchError, map, exhaustMap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import * as fromActions from '../actions';
-import * as fromRoot from '../reducers/index'
 
 @Injectable()
 export class AuthEffect {
+
   constructor(
-    private store$: Store<fromRoot.AppState>,
     private actions$: Actions,
     public authService: AuthService
   ) {}
@@ -28,5 +23,5 @@ export class AuthEffect {
         )
       )
     )
-  )
+  );
 }

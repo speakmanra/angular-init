@@ -9,10 +9,9 @@ describe('TextBoxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TextBoxComponent ],
+      declarations: [TextBoxComponent],
       imports: [RouterTestingModule]
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
