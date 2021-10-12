@@ -1,4 +1,4 @@
-# AGS Angular Init Script
+# Angular Init Script
 
 ### To get started
 
