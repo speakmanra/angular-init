@@ -1,14 +1,16 @@
 import * as actions from '../actions';
 import { createReducer, on, Action } from '@ngrx/store';
 
+export type UserInfo = {
+  username: string;
+  firstName: string;
+  lastName: string;
+}
+
 export type AuthState = {
   loggedIn: boolean;
   loggingIn: boolean;
-  userInfo: {
-    username: string;
-    firstName: string;
-    lastName: string;
-  } | null
+  userInfo: UserInfo | null;
 };
 
 export const initialState: AuthState = {
@@ -19,9 +21,19 @@ export const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
-  on(actions.Login, (state, action) => ({ ...state, loggedIn: false, loggingIn: true })),
-  on(actions.LoginSuccess, (state, action) => ({ ...state, loggedIn: true, loggingIn: false, userInfo: action.payload.userInfo })),
-  on(actions.LoginFailure, () => initialState)
+  on(actions.Login, (state, action) => ({
+    ...state,
+    loggedIn: false,
+    loggingIn: true
+  })),
+  on(actions.LoginSuccess, (state, action) => ({
+    ...state,
+    loggedIn: true,
+    loggingIn: false,
+    userInfo: action.payload
+  })),
+  on(actions.LoginFailure, () => initialState),
+  on(actions.Logout, () => initialState)
 );
 
 export function reducer(
@@ -31,4 +43,6 @@ export function reducer(
   return authReducer(state, action);
 }
 
-export const getAuthState = (state: AuthState) => state;
+export const isLoggedIn = (state: AuthState) => {
+  return state && state.loggedIn ? state.loggedIn : false}
+export const getUserInfo = (state: AuthState) => state && state.userInfo;

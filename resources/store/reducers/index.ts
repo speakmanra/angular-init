@@ -6,9 +6,9 @@ export interface AppState {
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  auth: fromAuth.reducer,
+  auth: fromAuth.reducer
 };
 
-export const getAuthState = createFeatureSelector<AppState>(
-  'auth'
-);
+export const getAuthState = (state: AppState) => state.auth;
+
+export const getUserState = createFeatureSelector<AppState>('auth');

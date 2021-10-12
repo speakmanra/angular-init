@@ -6,11 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(
-    private http: HttpClient,
-  ) {}
+  fakeReturn = {
+    username: 'ThereAndBackAgain1',
+    firstName: 'Bilbo',
+    lastName: 'Baggins'
+  }
+  constructor(private http: HttpClient) {}
 
   login(data: any): Observable<HttpResponse<{}>> {
-    return this.http.get<HttpResponse<{}>>(`/api/login`);
+    return this.http.get<HttpResponse<{}>>(`http://localhost:3000/assets/fake-return.json`);
   }
 }
